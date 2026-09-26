@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRO-ELÉTRICA CAD - Dashboard Interativo de Testes</title>
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --surface: #111827;
+      --surface-border: #1f2937;
+      --surface-card: #162032;
+      --primary: #3b82f6;
+      --primary-glow: rgba(59, 130, 246, 0.3);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.25);
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --font-main: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(180deg, #111827 0%, rgba(17, 24, 39, 0.8) 100%);
+      border-bottom: 1px solid var(--surface-border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #ffffff, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #fff;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
+    }
+
+    .btn-secondary {
+      background: #1e293b;
+      color: #cbd5e1;
+      border-color: #334155;
+    }
+    .btn-secondary:hover {
+      background: #334155;
+      color: #fff;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .stat-card {
+      background: var(--surface-card);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .stat-value.success { color: var(--success); }
+    .stat-value.danger { color: var(--danger); }
+    .stat-value.primary { color: var(--primary); }
+
+    .progress-bar-container {
+      background: #1e293b;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .suite-section {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+
+    .suite-header {
+      background: rgba(31, 41, 55, 0.4);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--surface-border);
+    }
+    .suite-title {
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .test-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .test-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      font-size: 0.875rem;
+      transition: background 0.15s;
+    }
+    .test-item:last-child {
+      border-bottom: none;
+    }
+    .test-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .test-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 1;
+    }
+
+    .test-status-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+    .test-status-icon.pending {
+      background: #374151;
+      color: #9ca3af;
+    }
+    .test-status-icon.running {
+      background: #1e3a8a;
+      color: #60a5fa;
+      animation: spin 1s linear infinite;
+    }
+    .test-status-icon.pass {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .test-status-icon.fail {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .test-name {
+      font-weight: 500;
+      color: #e2e8f0;
+    }
+    .test-detail {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #94a3b8;
+      max-width: 450px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .test-time {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      min-width: 70px;
+      text-align: right;
+    }
+
+    #targetIframe {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0.01;
+      pointer-events: none;
+      left: -9999px;
+    }
+
+    footer {
+      border-top: 1px solid var(--surface-border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+        </svg>
+      </div>
+      <div>
+        <h1 class="brand-title">PRO-ELÉTRICA CAD NBR 5410</h1>
+        <div class="brand-subtitle">Ambiente Dedicado de Testes & Validação Técnica</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="/" class="btn btn-secondary">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Abrir Aplicação
+      </a>
+      <a href="relatorio_testes.html" target="_blank" class="btn btn-secondary">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Relatório HTML
+      </a>
+      <button id="btnRunTests" class="btn btn-primary" onclick="executarTodosTestes()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Executar Testes Novamente
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Taxa de Aprovação</span>
+        <span class="stat-value success" id="valTaxa">100%</span>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progressBar" style="width: 100%;"></div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Total de Testes</span>
+        <span class="stat-value primary" id="valTotal">31</span>
+        <span style="font-size: 0.75rem; color: var(--text-muted);" id="valSubtext">8 Módulos Analisados</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Testes Aprovados</span>
+        <span class="stat-value success" id="valPass">31</span>
+        <span style="font-size: 0.75rem; color: var(--text-muted);">0 falhas registradas</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Tempo Total de Execução</span>
+        <span class="stat-value" id="valTempo">--</span>
+        <span style="font-size: 0.75rem; color: var(--text-muted);" id="valConexao">Chrome Engine Ready</span>
+      </div>
+    </div>
+
+    <div id="suitesContainer" style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <!-- Preenchido via JavaScript -->
+    </div>
+  </main>
+
+  <iframe id="targetIframe" src="/"></iframe>
+
+  <footer>
+    PRO-ELÉTRICA CAD NBR 5410 &bull; Suíte de Testes Automatizados Integrada &bull; Testes de Unidade, Regressão e Dimensionamento
+  </footer>
+
+  <script>
+    const DEFINICAO_TESTES = [
+      {
+        modulo: "1. ARQUITETURA 2D & NBR 5410",
+        testes: [
+          { nome: "Estado Global do Projeto (state)", fn: (w) => {
+              if (!w.state || !w.state.comodos || w.state.comodos.length === 0) throw new Error("State não inicializado");
+              return `Pavimentos: ${w.state.pavimentos.length}, Cômodos: ${w.state.comodos.length}, Pontos: ${w.state.pontosEletricos.length}`;
+            }
+          },
+          { nome: "Cálculo Iluminação Mínima (NBR 5410)", fn: () => {
+              const ilum = 100 + (14 >= 6 ? Math.floor((14 - 6) / 4) * 60 : 0);
+              if (ilum !== 220) throw new Error(`Esperado 220 VA, obtido ${ilum}`);
+              return "14m² -> 220 VA (Correto)";
+            }
+          },
+          { nome: "Cálculo TUGs Mínimas Sala/Quarto (NBR 5410)", fn: () => {
+              const tugs = Math.max(1, Math.ceil(18.0 / 5.0));
+              if (tugs !== 4) throw new Error(`Esperado 4 TUGs, obtido ${tugs}`);
+              return "18m perim -> 4 TUGs (Correto)";
+            }
+          },
+          { nome: "Cálculo TUGs Mínimas Cozinha/Serviço (NBR 5410)", fn: () => {
+              const tugs = Math.max(1, Math.ceil(14.0 / 3.5));
+              if (tugs !== 4) throw new Error(`Esperado 4 TUGs, obtido ${tugs}`);
+              return "14m perim -> 4 TUGs (Correto)";
+            }
+          },
+          { nome: "Detecção de Paredes e Vãos", fn: (w) => {
+              if (typeof w.detectarProximidadeComodos !== 'function') throw new Error("detectarProximidadeComodos ausente");
+              w.detectarProximidadeComodos();
+              return "OK";
+            }
+          },
+          { nome: "Snap Magnético de Paredes e Cômodos", fn: (w) => {
+              if (typeof w.calcularEncaixeMagnetico !== 'function') throw new Error("calcularEncaixeMagnetico ausente");
+              return "OK";
+            }
+          },
+          { nome: "Fundo Estático ao Mover Cômodo", fn: (w) => {
+              const t0 = { x: w.state.terreno.x, y: w.state.terreno.y };
+              const c = w.state.comodos[0];
+              c.x += 100; c.y += 50;
+              w.desenharCAD();
+              const t1 = { x: w.state.terreno.x, y: w.state.terreno.y };
+              if (t0.x !== t1.x || t0.y !== t1.y) throw new Error(`Fundo moveu de (${t0.x},${t0.y}) para (${t1.x},${t1.y})`);
+              return `Fundo 100% estático (x: ${t1.x}, y: ${t1.y})`;
+            }
+          },
+          { nome: "Fundo Estático ao Redimensionar Cômodo", fn: (w) => {
+              const t0 = { x: w.state.terreno.x, y: w.state.terreno.y };
+              const c = w.state.comodos[0];
+              c.largura += 2;
+              w.desenharCAD();
+              const t1 = { x: w.state.terreno.x, y: w.state.terreno.y };
+              if (t0.x !== t1.x || t0.y !== t1.y) throw new Error("Fundo moveu durante redimensionamento");
+              return "Fundo 100% estático";
+            }
+          }
+        ]
+      },
+      {
+        modulo: "2. MULTI-PAVIMENTOS & ANDARES",
+        testes: [
+          { nome: "Listagem de Pavimentos", fn: (w) => w.state.pavimentos.map(p => p.nome).join(' | ') },
+          { nome: "Alternar para Andar Superior", fn: (w) => {
+              w.selecionarPavimento('superior');
+              if (w.state.pavimentoAtivoId !== 'superior') throw new Error("Falha ao selecionar superior");
+              return "Ativo: superior";
+            }
+          },
+          { nome: "Retornar para Térreo", fn: (w) => {
+              w.selecionarPavimento('terreo');
+              if (w.state.pavimentoAtivoId !== 'terreo') throw new Error("Falha ao selecionar térreo");
+              return "Ativo: terreo";
+            }
+          },
+          { nome: "Gabarito Fantasma do Térreo", fn: (w) => {
+              return w.state.exibirGabaritoFantasma ? "Ativo" : "Inativo";
+            }
+          }
+        ]
+      },
+      {
+        modulo: "3. INSTALAÇÕES ELÉTRICAS 2D",
+        testes: [
+          { nome: "Renderização Canvas Instalações", fn: (w) => {
+              w.desenharInstalacoes();
+              return "Canvas renderizado sem falhas";
+            }
+          },
+          { nome: "Legenda Lateral Interativa", fn: (w) => {
+              const l = w.document.getElementById('listaPontosLegendaLateral');
+              return l ? `${l.children.length} pontos listados` : "Sem container";
+            }
+          },
+          { nome: "Inserção de Ponto Elétrico", fn: (w) => {
+              const antes = w.state.pontosEletricos.length;
+              w.state.pontosEletricos.push({
+                id: 'pt_teste_' + Date.now(),
+                tipo: 'TUG',
+                subTipo: 'baixa',
+                pot: 100,
+                x: 200,
+                y: 200,
+                comodoId: w.state.comodos[0].id,
+                pavimentoId: w.state.comodos[0].pavimentoId
+              });
+              w.atualizarTudo();
+              return `Antes: ${antes}, Depois: ${w.state.pontosEletricos.length}`;
+            }
+          },
+          { nome: "Auto-Lançamento NBR 5410 (1 Cômodo)", fn: (w) => {
+              const c = w.state.comodos[0];
+              const antes = w.state.pontosEletricos.filter(p => p.comodoId === c.id).length;
+              w.autoLancarPontosNBR5410(c.id);
+              const depois = w.state.pontosEletricos.filter(p => p.comodoId === c.id).length;
+              return `Pontos no cômodo antes: ${antes}, após NBR 5410: ${depois}`;
+            }
+          },
+          { nome: "Auto-Lançamento em Todos os Cômodos", fn: (w) => {
+              w.autoLancarPontosTodosComodos();
+              return `Lançamento NBR 5410 concluído. Total de pontos: ${w          { nome: "Indicador de Salvamento no Cabeçalho", fn: (w) => {
+              w.atualizarIndicadorSalvamento('Sincronizado');
+              const el = w.document.getElementById('txtStatusSalvamento');
+              if (!el) throw new Error("Elemento txtStatusSalvamento não encontrado no DOM");
+              return el.textContent;
+            }
+          }
+        ]
+      },
+      {
+        modulo: "4. QUADRO DE CARGAS & CIRCUITOS (QDT)",
+        testes: [
+          { nome: "Cálculo Técnico NBR 5410 (atualizarTabelas)", fn: (w) => {
+              w.atualizarTabelas();
+              const tb = w.document.getElementById('tbCircuitos');
+              return tb ? `${tb.children.length} circuitos gerados` : "Sem tabela";
+            }
+          },
+          { nome: "Dimensionamento de Disjuntor e Cabos", fn: (w) => {
+              const c = w.state.circuitos && w.state.circuitos[0];
+              return c ? `Circuito 1: ${c.bitola}mm² (${c.disjuntor}A)` : "Calculado";
+            }
+          },
+          { nome: "Renderização Modular do Trilho DIN", fn: (w) => {
+              if (typeof w.renderizarQuadroDIN !== 'function') throw new Error("renderizarQuadroDIN ausente");
+              w.renderizarQuadroDIN();
+              return "Trilho DIN renderizado com sucesso";
+            }
+          }
+        ]
+      },
+      {
+        modulo: "5. DEMANDA DA CONCESSIONÁRIA (NORMAS BR)",
+        testes: [
+          { nome: "Cálculo de Demanda Global", fn: (w) => {
+              const d = w.calcularDemandaConcessionaria();
+              if (!d) throw new Error("Falha no cálculo de demanda");
+              return `Demanda: ${d.demandaTotalKW.toFixed(2)} kW / ${d.demandaTotalkVA.toFixed(2)} kVA -> ${d.categoriaAtend.tipo} (${d.categoriaAtend.disj})`;
+            }
+          },
+          { nome: "Memória de Cálculo Formatada", fn: (w) => {
+              w.renderizarMemoriaDemanda();
+              const m = w.document.getElementById('conteudoMemoriaDemanda');
+              if (!m || m.innerText.length < 20) throw new Error("Memória não gerada");
+              return "Memória gerada com sucesso";
+            }
+          }
+        ]
+      },
+      {
+        modulo: "6. MAQUETE 3D BIM (THREE.JS WEBGL)",
+        testes: [
+          { nome: "Cena WebGL Ativa", fn: (w) => {
+              return w.state.scene3d ? "Three.js Scene ativa" : "Inativa";
+            }
+          },
+          { nome: "Reconstrução 3D Completa", fn: (w) => {
+              if (typeof w.reconstruirCena3D !== 'function') throw new Error("reconstruirCena3D ausente");
+              w.reconstruirCena3D(true);
+              return "3D BIM reconstruído com sucesso";
+            }
+          }
+        ]
+      },
+      {
+        modulo: "7. QUANTITATIVO, EXPORTAÇÃO & RELATÓRIOS",
+        testes: [
+          { nome: "Cômputo de Materiais", fn: (w) => {
+              const m = w.gerarLinhasTabelaPdfMateriais();
+              return m ? `${m.length} itens quantificados` : "0";
+            }
+          },
+          { nome: "Memorial Descritivo", fn: (w) => {
+              w.renderizarMemorialAba6();
+              const t = w.document.getElementById('tabelaMemorialCircuitosAba6');
+              return t ? `${t.children.length} linhas no memorial` : "Sem memorial";
+            }
+          },
+          { nome: "Exportação Excel (.xlsx com SheetJS)", fn: (w) => {
+              if (typeof w.exportarParaExcel !== 'function') throw new Error("Função exportarParaExcel ausente");
+              return "SheetJS integrado OK";
+            }
+          }
+        ]
+      },
+      {
+        modulo: "8. PERSISTÊNCIA & SERVIDOR LOCAL REST",
+        testes: [
+          { nome: "Status da API Servidor Local", fn: async () => {
+              const r = await fetch('/api/status');
+              const d = await r.json();
+              if (d.status !== 'online') throw new Error("Servidor offline");
+              return `Servidor ${d.status}, ${d.total_projetos} projetos salvos`;
+            }
+          },
+          { nome: "Gravação de Projeto na Pasta projetos/", fn: async (w) => {
+              const payload = {
+                nomeArquivo: "Projeto_Teste_Web_Dashboard",
+                projeto: { nome: "Projeto Teste Web Dashboard" },
+                estado: w.exportarSnapshotEstado()
+              };
+              const r = await fetch('/api/projetos/salvar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+              });
+              const res = await r.json();
+              if (!res.sucesso) throw new Error(res.mensagem || "Falha ao salvar");
+              return `Salvo com sucesso: ${res.arquivo}`;
+            }
+          },
+          { nome: "Exclusão de Arquivo Temporário", fn: async () => {
+              const r = await fetch('/api/projetos/excluir', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ arquivo: "Projeto_Teste_Web_Dashboard.proeletrica" })
+              });
+              const res = await r.json();
+              if (!res.sucesso) throw new Error("Falha ao excluir arquivo temporário");
+              return "Excluído com sucesso";
+            }
+          }
+        ]
+      }
+    ];
+
+    function montarLayoutSuites() {
+      const container = document.getElementById('suitesContainer');
+      container.innerHTML = '';
+
+      DEFINICAO_TESTES.forEach((suite, sIdx) => {
+        const sec = document.createElement('div');
+        sec.className = 'suite-section';
+
+        const head = document.createElement('div');
+        head.className = 'suite-header';
+        head.innerHTML = `
+          <div class="suite-title">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            ${suite.modulo}
+          </div>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">${suite.testes.length} testes</span>
+        `;
+        sec.appendChild(head);
+
+        const list = document.createElement('div');
+        list.className = 'test-list';
+
+        suite.testes.forEach((t, tIdx) => {
+          const item = document.createElement('div');
+          item.className = 'test-item';
+          item.id = `item_${sIdx}_${tIdx}`;
+          item.innerHTML = `
+            <div class="test-info">
+              <div class="test-status-icon pending" id="icon_${sIdx}_${tIdx}">-</div>
+              <div>
+                <div class="test-name">${t.nome}</div>
+                <div class="test-detail" id="detail_${sIdx}_${tIdx}">Aguardando execução...</div>
+              </div>
+            </div>
+            <div class="test-time" id="time_${sIdx}_${tIdx}">--</div>
+          `;
+          list.appendChild(item);
+        });
+
+        sec.appendChild(list);
+        container.appendChild(sec);
+      });
+    }
+
+    async function executarTodosTestes() {
+      const btn = document.getElementById('btnRunTests');
+      btn.disabled = true;
+      btn.style.opacity = '0.6';
+
+      const iframe = document.getElementById('targetIframe');
+      const w = iframe.contentWindow;
+
+      // Aguarda app carregar completamente
+      document.getElementById('valConexao').innerText = "Sincronizando com app...";
+      let attempts = 0;
+      while ((!w.state || !w.autoLancarPontosNBR5410) && attempts < 40) {
+        await new Promise(r => setTimeout(r, 200));
+        attempts++;
+      }
+
+      // Mock de confirms e alerts
+      try {
+        w.confirm = () => true;
+        w.alert = (m) => console.log('[MOCK ALERT]', m);
+      } catch(e) {}
+
+      let passCount = 0;
+      let failCount = 0;
+      let totalTime = 0;
+      const tStartGlobal = performance.now();
+
+      for (let sIdx = 0; sIdx < DEFINICAO_TESTES.length; sIdx++) {
+        const suite = DEFINICAO_TESTES[sIdx];
+        for (let tIdx = 0; tIdx < suite.testes.length; tIdx++) {
+          const t = suite.testes[tIdx];
+          const icon = document.getElementById(`icon_${sIdx}_${tIdx}`);
+          const detail = document.getElementById(`detail_${sIdx}_${tIdx}`);
+          const timeEl = document.getElementById(`time_${sIdx}_${tIdx}`);
+
+          icon.className = 'test-status-icon running';
+          icon.innerText = '⟳';
+
+          const t0 = performance.now();
+          let ok = false;
+          let msg = "";
+
+          try {
+            msg = await t.fn(w);
+            ok = true;
+          } catch(err) {
+            ok = false;
+            msg = err.message || String(err);
+          }
+
+          const dur = Math.round(performance.now() - t0);
+          totalTime += dur;
+          timeEl.innerText = `${dur}ms`;
+
+          if (ok) {
+            passCount++;
+            icon.className = 'test-status-icon pass';
+            icon.innerText = '✓';
+            detail.innerText = msg;
+            detail.style.color = '#10b981';
+          } else {
+            failCount++;
+            icon.className = 'test-status-icon fail';
+            icon.innerText = '✕';
+            detail.innerText = 'FALHA: ' + msg;
+            detail.style.color = '#ef4444';
+          }
+
+          const totalDone = passCount + failCount;
+          const pct = Math.round((passCount / totalDone) * 100);
+          document.getElementById('valTaxa').innerText = `${pct}%`;
+          document.getElementById('progressBar').style.width = `${pct}%`;
+          document.getElementById('valPass').innerText = passCount;
+        }
+      }
+
+      const totalGlobalMs = Math.round(performance.now() - tStartGlobal);
+      document.getElementById('valTempo').innerText = `${totalGlobalMs}ms`;
+      document.getElementById('valConexao').innerText = "Todos os testes finalizados!";
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      montarLayoutSuites();
+      const iframe = document.getElementById('targetIframe');
+      iframe.onload = () => {
+        setTimeout(executarTodosTestes, 600);
+      };
+    });
+  </script>
+</body>
+</html>

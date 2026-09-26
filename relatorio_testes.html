@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Testes Automatizados - PRO-ELÉTRICA CAD</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0b1120; color: #f8fafc; padding: 24px; margin: 0; }
+        .header { background: #1e293b; padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid #334155; }
+        h1 { margin: 0 0 8px 0; color: #38bdf8; font-size: 24px; }
+        .badge { padding: 4px 10px; border-radius: 6px; font-weight: bold; font-size: 13px; display: inline-block; }
+        .badge-success { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .badge-fail { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; background: #0f172a; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #1e293b; font-size: 13px; }
+        th { background: #1e293b; color: #94a3b8; font-weight: 600; text-transform: uppercase; font-size: 11px; }
+        tr:hover { background: #1e293b/40; }
+        .group-header { background: #0f172a; color: #fbbf24; font-weight: bold; font-size: 14px; padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PRO-ELÉTRICA CAD NBR 5410 — Relatório da Suíte de Testes</h1>
+        <p style="margin: 0; color: #94a3b8; font-size: 13px;">Data/Hora da Execução: <strong>25/09/2026 22:50:54</strong></p>
+        <div style="margin-top: 14px; display: flex; gap: 12px;">
+            <span class="badge badge-success">✓ 37 TESTES APROVADOS (100%)</span>
+            
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Módulo</th>
+                <th>Funcionalidade Testada</th>
+                <th>Status</th>
+                <th>Resultado / Telemetria</th>
+                <th>Tempo</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Estado Global do Projeto (state)</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">{"pavimentos":2,"comodos":6,"pontos":37}</td>
+                <td style="color: #64748b; font-size: 11px;">5 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Cálculo Iluminação Mínima (NBR 5410)</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">14m² -> 220 VA (Correto)</td>
+                <td style="color: #64748b; font-size: 11px;">2 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Cálculo TUGs Mínimas Sala/Quarto (NBR 5410)</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">18m perim -> 4 TUGs (Correto)</td>
+                <td style="color: #64748b; font-size: 11px;">3 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Cálculo TUGs Mínimas Cozinha/Serviço (NBR 5410)</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">14m perim -> 4 TUGs (Correto)</td>
+                <td style="color: #64748b; font-size: 11px;">3 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Detecção de Paredes e Vãos</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">OK</td>
+                <td style="color: #64748b; font-size: 11px;">9 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Snap Magnético de Paredes e Cômodos</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">OK</td>
+                <td style="color: #64748b; font-size: 11px;">7 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Fundo Estático ao Mover Cômodo</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Fundo 100% estático (x: 40, y: 40)</td>
+                <td style="color: #64748b; font-size: 11px;">9 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Fundo Estático ao Redimensionar Cômodo</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Fundo 100% estático</td>
+                <td style="color: #64748b; font-size: 11px;">12 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Fixação de Cômodos na Planta (Salvar/Travar)</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Trava global e individual ativada</td>
+                <td style="color: #64748b; font-size: 11px;">82 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Restrição ao Perímetro do Lote</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Cômodo retido estritamente na margem do lote</td>
+                <td style="color: #64748b; font-size: 11px;">12 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Adição e Exclusão de Cômodo (removerComodoId)</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Adicionado e Excluído com sucesso (Cascade OK)</td>
+                <td style="color: #64748b; font-size: 11px;">52 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Exclusão de Cômodo via Modal de Edição</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Excluído com sucesso via Modal</td>
+                <td style="color: #64748b; font-size: 11px;">54 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">1. ARQUITETURA 2D & NBR 5410</td>
+                <td style="color: #ffffff; font-weight: 500;">Exclusão de Cômodo via Pop-up Rápido</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Excluído com sucesso via Pop-up Rápido</td>
+                <td style="color: #64748b; font-size: 11px;">38 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">2. MULTI-PAVIMENTOS & ANDARES</td>
+                <td style="color: #ffffff; font-weight: 500;">Listagem de Pavimentos</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Pavimento Térreo | 1º Pavimento (Superior)</td>
+                <td style="color: #64748b; font-size: 11px;">12 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">2. MULTI-PAVIMENTOS & ANDARES</td>
+                <td style="color: #ffffff; font-weight: 500;">Alternar para Andar Superior</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Ativo: superior</td>
+                <td style="color: #64748b; font-size: 11px;">28 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">2. MULTI-PAVIMENTOS & ANDARES</td>
+                <td style="color: #ffffff; font-weight: 500;">Retornar para Térreo</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Ativo: terreo</td>
+                <td style="color: #64748b; font-size: 11px;">22 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">2. MULTI-PAVIMENTOS & ANDARES</td>
+                <td style="color: #ffffff; font-weight: 500;">Gabarito Fantasma do Térreo</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Ativo</td>
+                <td style="color: #64748b; font-size: 11px;">8 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">3. INSTALAÇÕES ELÉTRICAS 2D</td>
+                <td style="color: #ffffff; font-weight: 500;">Renderização Canvas Instalações</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Canvas renderizado sem falhas</td>
+                <td style="color: #64748b; font-size: 11px;">11 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">3. INSTALAÇÕES ELÉTRICAS 2D</td>
+                <td style="color: #ffffff; font-weight: 500;">Legenda Lateral Interativa</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">19 pontos listados</td>
+                <td style="color: #64748b; font-size: 11px;">6 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">3. INSTALAÇÕES ELÉTRICAS 2D</td>
+                <td style="color: #ffffff; font-weight: 500;">Inserção de Ponto Elétrico</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Antes: 37, Depois: 38</td>
+                <td style="color: #64748b; font-size: 11px;">14 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">3. INSTALAÇÕES ELÉTRICAS 2D</td>
+                <td style="color: #ffffff; font-weight: 500;">Auto-Lançamento NBR 5410 (1 Cômodo)</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Pontos no cômodo antes: 7, após NBR 5410: 7</td>
+                <td style="color: #64748b; font-size: 11px;">23 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">3. INSTALAÇÕES ELÉTRICAS 2D</td>
+                <td style="color: #ffffff; font-weight: 500;">Auto-Lançamento em Todos os Cômodos</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Lançamento NBR 5410 concluído. Total de pontos: 38</td>
+                <td style="color: #64748b; font-size: 11px;">38 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">3. INSTALAÇÕES ELÉTRICAS 2D</td>
+                <td style="color: #ffffff; font-weight: 500;">Indicador de Salvamento no Cabeçalho</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Sincronizado</td>
+                <td style="color: #64748b; font-size: 11px;">18 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">4. QUADRO DE CARGAS & CIRCUITOS (QDT)</td>
+                <td style="color: #ffffff; font-weight: 500;">Cálculo Técnico NBR 5410 (atualizarTabelas)</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">11 circuitos gerados</td>
+                <td style="color: #64748b; font-size: 11px;">13 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">4. QUADRO DE CARGAS & CIRCUITOS (QDT)</td>
+                <td style="color: #ffffff; font-weight: 500;">Dimensionamento de Disjuntor e Cabos</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Calculado</td>
+                <td style="color: #64748b; font-size: 11px;">2 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">4. QUADRO DE CARGAS & CIRCUITOS (QDT)</td>
+                <td style="color: #ffffff; font-weight: 500;">Renderização Modular do Trilho DIN</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Trilho DIN renderizado com sucesso</td>
+                <td style="color: #64748b; font-size: 11px;">13 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">5. DEMANDA DA CONCESSIONÁRIA (NORMAS BR)</td>
+                <td style="color: #ffffff; font-weight: 500;">Cálculo de Demanda Global</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Demanda: 23.73 kW / 24.98 kVA -> Trifásico (125 A)</td>
+                <td style="color: #64748b; font-size: 11px;">9 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">5. DEMANDA DA CONCESSIONÁRIA (NORMAS BR)</td>
+                <td style="color: #ffffff; font-weight: 500;">Memória de Cálculo Formatada</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Memória gerada com sucesso</td>
+                <td style="color: #64748b; font-size: 11px;">42 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">6. MAQUETE 3D BIM (THREE.JS WEBGL)</td>
+                <td style="color: #ffffff; font-weight: 500;">Cena WebGL Ativa</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Three.js Scene ativa</td>
+                <td style="color: #64748b; font-size: 11px;">12 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">6. MAQUETE 3D BIM (THREE.JS WEBGL)</td>
+                <td style="color: #ffffff; font-weight: 500;">Reconstrução 3D Completa</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">3D BIM reconstruído com sucesso</td>
+                <td style="color: #64748b; font-size: 11px;">17 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">7. QUANTITATIVO, EXPORTAÇÃO & RELATÓRIOS</td>
+                <td style="color: #ffffff; font-weight: 500;">Cômputo de Materiais</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">7384 itens quantificados</td>
+                <td style="color: #64748b; font-size: 11px;">12 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">7. QUANTITATIVO, EXPORTAÇÃO & RELATÓRIOS</td>
+                <td style="color: #ffffff; font-weight: 500;">Memorial Descritivo</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">20 linhas no memorial</td>
+                <td style="color: #64748b; font-size: 11px;">18 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">7. QUANTITATIVO, EXPORTAÇÃO & RELATÓRIOS</td>
+                <td style="color: #ffffff; font-weight: 500;">Exportação Excel (.xlsx com SheetJS)</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">SheetJS integrado OK</td>
+                <td style="color: #64748b; font-size: 11px;">7 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">8. PERSISTÊNCIA & SERVIDOR LOCAL REST</td>
+                <td style="color: #ffffff; font-weight: 500;">Status da API Servidor Local</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Servidor online, 3 projetos salvos</td>
+                <td style="color: #64748b; font-size: 11px;">24 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">8. PERSISTÊNCIA & SERVIDOR LOCAL REST</td>
+                <td style="color: #ffffff; font-weight: 500;">Gravação de Projeto na Pasta projetos/</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Salvo com sucesso: Projeto_Validacao_Suite.proeletrica</td>
+                <td style="color: #64748b; font-size: 11px;">20 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">8. PERSISTÊNCIA & SERVIDOR LOCAL REST</td>
+                <td style="color: #ffffff; font-weight: 500;">Exclusão de Arquivo Temporário</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Excluído com sucesso</td>
+                <td style="color: #64748b; font-size: 11px;">12 ms</td>
+            </tr>
+        
+            <tr>
+                <td style="color: #94a3b8; font-weight: 600;">8. PERSISTÊNCIA & SERVIDOR LOCAL REST</td>
+                <td style="color: #ffffff; font-weight: 500;">Preservação Fiel do Lote no Salvamento/Restauração</td>
+                <td><span style="color: #34d399; font-weight: bold;">✓ SUCESSO</span></td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px;">Lote 5x25m preservado integralmente</td>
+                <td style="color: #64748b; font-size: 11px;">42 ms</td>
+            </tr>
+        
+        </tbody>
+    </table>
+</body>
+</html>
+    

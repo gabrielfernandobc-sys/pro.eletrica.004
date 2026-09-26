@@ -1,0 +1,59 @@
+{
+  "name": "PRO-ELÉTRICA CAD NBR 5410",
+  "short_name": "ProElétrica",
+  "description": "Software CAD/BIM de Projetos Elétricos Residenciais e Prediais conforme Norma NBR 5410",
+  "id": "pro-eletrica-cad-nbr5410",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#020617",
+  "theme_color": "#0f172a",
+  "categories": [
+    "productivity",
+    "utilities",
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nova Planta",
+      "url": "./index.html#planta",
+      "description": "Abrir o módulo CAD de planta baixa"
+    },
+    {
+      "name": "Quadro de Cargas",
+      "url": "./index.html#quadro",
+      "description": "Visualizar dimensionamento e disjuntores"
+    },
+    {
+      "name": "Maquete 3D BIM",
+      "url": "./index.html#bim",
+      "description": "Visualizar tubulações e prumadas em 3D"
+    }
+  ]
+}
